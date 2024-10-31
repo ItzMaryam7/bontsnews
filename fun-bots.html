@@ -58,7 +58,7 @@
         .btn {
             display: inline-block;
             padding: 12px 30px;
-            background-color: #99AAB5;
+            background-color: #80E2FF;
             color: #ffffff;
             text-decoration: none;
             border-radius: 50px;
@@ -69,9 +69,34 @@
         }
 
         .btn:hover {
-            background-color: #FFA8FF;
+            background-color: #81F9FF;
             transform: scale(1.05);
         }
+        
+        .container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .home-btn {
+        background-color: #4CAF50; /* لون جذاب للزر */
+        color: #ffffff;
+        padding: 15px 35px;
+        border-radius: 50px;
+        font-weight: bold;
+        font-size: 1.2em;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease; /* تأثير الانتقال */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* ظل خفيف */
+    }
+
+    .home-btn:hover {
+        background-color: #66BB6A; /* لون أفتح عند تمرير الماوس */
+        transform: scale(1.1); /* تكبير بسيط للزر */
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* زيادة الظل */
+    }
     </style>
 </head>
 <body>
@@ -99,8 +124,9 @@
         <a href="https://discord.com/oauth2/authorize?client_id=437808476106784770&scope=bot" class="btn">إضافة البوت</a>
     </section>
 
-    <div style="text-align: center; margin: 20px;">
-        <a href="index.html" class="btn">العودة إلى الصفحة الرئيسية</a> <!-- زر العودة -->
-    </div>
+    <div class="container">
+    <a href="index.html" class="btn home-btn">العودة إلى الصفحة الرئيسية</a>
+</div>
+
 </body>
 </html>
