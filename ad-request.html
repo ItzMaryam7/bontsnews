@@ -140,18 +140,18 @@
     </div>
     <hr>
 
-    <form action="mailto:maryam18ko@gmail.com" method="post" enctype="multipart/form-data">
+    <form action="https://formspree.io/f/xkgnjzgb" method="post" enctype="multipart/form-data">
         <label for="name">اسمك :</label>
-        <input type="text" id="name" placeholder="أدخل اسمك" required>
+        <input type="text" id="name" name="name" placeholder="أدخل اسمك" required>
 
         <label for="email">بريدك الإلكتروني :</label>
-        <input type="email" id="email" placeholder="أدخل بريدك الإلكتروني" required>
+        <input type="email" id="email" name="email" placeholder="أدخل بريدك الإلكتروني" required>
 
         <label for="adDetails">تفاصيل الإعلان:</label>
-        <textarea id="adDetails" rows="5" placeholder="اكتب تفاصيل الإعلان هنا" required></textarea>
+        <textarea id="adDetails" name="adDetails" rows="5" placeholder="اكتب تفاصيل الإعلان هنا" required></textarea>
 
         <label for="profilePicture">صورة بروفايل Discord:</label>
-        <input type="file" id="profilePicture" accept="image/*">
+        <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
 
         <button type="submit">إرسال الطلب</button>
     </form>
