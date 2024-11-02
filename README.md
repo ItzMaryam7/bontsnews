@@ -17,4 +17,4 @@ Stay connected and never miss out on the best that the world of Discord has to o
 
 ---
 
-> **Note**: We welcome your feedback and suggestions to improve our website. 🤝
+> **Note**: We welcome your feedback and suggestions to improve our website. 🤝    
