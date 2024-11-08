@@ -6,98 +6,139 @@
     <title>بوتات الموسيقى</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(rgba(29, 31, 33, 0.9), rgba(20, 22, 24, 0.9)), url('music-background.jpg') center/cover;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, rgba(29, 31, 33, 0.9), rgba(20, 22, 24, 0.9)), url('music-background.jpg') center/cover no-repeat;
             color: #ffffff;
             margin: 0;
             overflow-x: hidden;
+            background-attachment: fixed;
         }
 
         header {
-            background-color: rgba(153, 170, 181, 0.85);
-            padding: 50px 20px;
+            background-color: rgba(59, 89, 152, 0.85);
+            padding: 80px 20px;
             text-align: center;
-            border-radius: 0 0 15px 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(8px);
+            border-radius: 0 0 25px 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(12px);
         }
 
         header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            color: #222;
+            font-size: 3.2em;
+            margin-bottom: 15px;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
         }
 
         header p {
-            font-size: 1.1em;
-            color: #333;
+            font-size: 1.2em;
+            color: #ccc;
+            margin-bottom: 30px;
         }
 
         .bot-item {
             background-color: rgba(47, 49, 54, 0.85);
-            margin: 30px auto;
-            padding: 30px;
-            max-width: 800px;
-            border-radius: 15px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(5px);
+            margin: 40px auto;
+            padding: 35px;
+            max-width: 900px;
+            border-radius: 20px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
             text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .bot-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
 
         .bot-item h2 {
-            font-size: 1.8em;
+            font-size: 2em;
             color: #ffffff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .bot-item p {
-            font-size: 1em;
+            font-size: 1.1em;
             color: #cccccc;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .btn {
             display: inline-block;
-            padding: 12px 30px;
+            padding: 14px 40px;
             background-color: #7289DA;
             color: #ffffff;
             text-decoration: none;
             border-radius: 50px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             font-weight: bold;
-            font-size: 1em;
-            margin: 10px 0;
+            font-size: 1.1em;
+            margin: 15px 0;
         }
 
         .btn:hover {
             background-color: #99AAB5;
-            transform: scale(1.05);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* زر العودة للصفحة الرئيسية */
         .container {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-    }
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
 
-    .home-btn {
-        background-color: #4CAF50; /* لون جذاب للزر */
-        color: #ffffff;
-        padding: 15px 35px;
-        border-radius: 50px;
-        font-weight: bold;
-        font-size: 1.2em;
-        text-decoration: none;
-        display: inline-block;
-        transition: all 0.3s ease; /* تأثير الانتقال */
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* ظل خفيف */
-    }
+        .home-btn {
+            background-color: #4CAF50;
+            color: #ffffff;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.3em;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+        }
 
-    .home-btn:hover {
-        background-color: #66BB6A; /* لون أفتح عند تمرير الماوس */
-        transform: scale(1.1); /* تكبير بسيط للزر */
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* زيادة الظل */
-    }
+        .home-btn:hover {
+            background-color: #66BB6A;
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            header p {
+                font-size: 1.1em;
+            }
+
+            .bot-item {
+                max-width: 90%;
+                padding: 30px;
+            }
+
+            .bot-item h2 {
+                font-size: 1.8em;
+            }
+
+            .btn {
+                font-size: 1em;
+                padding: 12px 30px;
+            }
+
+            .home-btn {
+                font-size: 1.2em;
+                padding: 15px 35px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -118,9 +159,9 @@
         <a href="https://discord.com/oauth2/authorize?client_id=881434202273554472&scope=bot" class="btn">إضافة البوت</a>
     </section>
     
-  <div class="container">
-  <a href="index.html" class="btn home-btn">العودة إلى الصفحة الرئيسية</a>
-</div>
+    <div class="container">
+        <a href="index.html" class="home-btn">العودة إلى الصفحة الرئيسية</a>
+    </div>
     
 </body>
 </html>

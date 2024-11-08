@@ -13,6 +13,7 @@
             padding: 20px;
             overflow-x: hidden;
             backdrop-filter: blur(10px);
+            box-sizing: border-box;
         }
 
         header {
@@ -21,11 +22,17 @@
         }
 
         header h1 {
-            font-size: 2.8em;
-            background: -webkit-linear-gradient(#ffffff, #a0a0a0);
+            font-size: 3em;
+            background: linear-gradient(45deg, #ff6b81, #6a82fb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin: 0;
+            animation: fadeInText 2s ease-in-out;
+        }
+
+        @keyframes fadeInText {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .section {
@@ -36,29 +43,37 @@
             border-radius: 15px;
             text-align: center;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
         }
 
         .section h2 {
             color: #ffffff;
             margin-bottom: 20px;
+            font-size: 1.8em;
         }
 
         .section p {
             color: #d1d1d1;
             margin-bottom: 20px;
+            font-size: 1.1em;
         }
 
         .btn {
             background-color: #7289DA;
             color: #ffffff;
-            padding: 10px 20px;
+            padding: 12px 25px;
             text-decoration: none;
-            border-radius: 8px;
-            font-size: 1.1em;
+            border-radius: 10px;
+            font-size: 1.2em;
             font-weight: 600;
             transition: background-color 0.3s ease, transform 0.2s ease;
             cursor: pointer;
-            margin-bottom: 15px; /* مسافة بين الأزرار */
+            margin: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .btn:hover {
@@ -75,11 +90,11 @@
         .back-btn a {
             background-color: #7289DA;
             color: #ffffff;
-            padding: 12px 25px;
+            padding: 14px 30px;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 10px;
             transition: background-color 0.3s ease, transform 0.2s ease;
-            font-size: 1.1em;
+            font-size: 1.2em;
             font-weight: 600;
         }
 
@@ -88,21 +103,24 @@
             transform: translateY(-3px);
         }
 
-        .login-form {
-            display: none; /* إخفاء النموذج افتراضيًا */
-            margin-bottom: 30px;
-        }
-
         .login-form input {
             padding: 10px;
             margin: 10px 0;
             width: 80%;
+            border-radius: 8px;
+            border: 1px solid #fff;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
         }
 
         .code-input {
             margin-top: 20px;
             padding: 10px;
             width: 80%;
+            border-radius: 8px;
+            border: 1px solid #fff;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
         }
     </style>
 </head>
@@ -115,133 +133,159 @@
         <h2>تسجيل الدخول</h2>
         <div class="login-form" id="login-form">
             <input type="text" id="username" placeholder="اسم المستخدم" required />
-            <button class="btn" onclick="login()">تسجيل الدخول</button>
+            <button class="btn" onclick="login()">بدا دخول</button>
         </div>
         <button class="btn" onclick="showLoginForm()">تسجيل الدخول</button>
     </div>
 
-    <!-- قسم جمع الكوينز -->
     <div class="section" id="collect-coins" style="display: none;">
         <h2>جمع الكوينز</h2>
         <p>لديك <span id="coin-count">0</span> كوينز.</p>
         <p>جمع الكوينز تلقائيًا كل دقيقة!</p>
     </div>
 
-    <!-- قسم استبدال الأكواد -->
     <div class="section" id="redeem-code-section" style="display: none;">
         <h2>استبدال كود</h2>
         <input type="text" id="redeem-code" class="code-input" placeholder="أدخل الكود هنا" />
         <button class="btn" onclick="redeemCode()">استبدال الكود</button>
     </div>
 
-    <!-- قسم شراء المشاريع -->
     <div class="section" id="buy-projects" style="display: none;">
         <h2>شراء مشاريع أو ملفات</h2>
         <p>يمكنك شراء المشاريع باستخدام الكوينز.</p>
-        <div id="project-buttons"></div> <!-- مكان لعرض أزرار شراء المشاريع -->
+        <div id="project-buttons"></div>
     </div>
 
     <div class="back-btn">
         <a href="index.html">العودة إلى الصفحة الرئيسية</a>
     </div>
 
-    <script>
-        let coins = 0;
-        let username = '';
-        const users = JSON.parse(localStorage.getItem('users')) || {}; // استرجاع بيانات المستخدمين
+<script>
+  let coins = 0;
+  let username = '';
+  const users = JSON.parse(localStorage.getItem('users')) || {};
 
-        const projects = [
-            { name: "بروجكت بوت ميكر اصدار ٥", price: 150, file: "https://discord.gg/mJqaJdUYgT", description: "وصف المشروع 1: هذا هو المشروع الأول." },
-            { name: "بروجكت بوت نسخ سيرفرات", price: 253, file: "https://discord.gg/WVaPZTqeV3", description: "وصف المشروع 2: هذا هو المشروع الثاني." },
-            { name: "بروجكت بوت بيع بروجكتات سلاش", price: 223, file: "https://www.yourwebsite.com/files/project3.zip", description: "وصف المشروع 3: هذا هو المشروع الثالث." },
-            { name: "بروجكت بوت تكت مطور لاصحاب الجولات", price: 193, file: "https://www.mediafire.com/file/mkch5p2i56s9hnn/ticket+v3+for+phone.zip/file", description: "وصف المشروع 4: هذا هو المشروع الرابع." },
-            { name: "بروجكت بوت سستم كوميونتي ١٦٠ امر", price: 132, file: "https://www.mediafire.com/file/t4q85r358srxyjt/بروجكت+سستم+كوميونتي+١٦٠+امر.zip/file", description: "وصف المشروع 5: هذا هو المشروع الخامس." }
-        ];
+  const projects = [
+    { name: "بروجكت بوت ميكر اصدار ٥", price: 150, file: "https://discord.gg/mJqaJdUYgT", description: "وصف المشروع 1: هذا هو المشروع الأول." },
+    { name: "بروجكت بوت نسخ سيرفرات", price: 253, file: "https://discord.gg/WVaPZTqeV3", description: "وصف المشروع 2: هذا هو المشروع الثاني." },
+    { name: "بروجكت بوت بيع بروجكتات سلاش", price: 223, file: "https://www.yourwebsite.com/files/project3.zip", description: "وصف المشروع 3: هذا هو المشروع الثالث." },
+    { name: "بروجكت بوت تكت مطور لاصحاب الجولات", price: 193, file: "https://www.mediafire.com/file/mkch5p2i56s9hnn/ticket+v3+for+phone.zip/file", description: "وصف المشروع 4: هذا هو المشروع الرابع." },
+    { name: "بروجكت بوت سستم كوميونتي ١٦٠ امر", price: 132, file: "https://www.mediafire.com/file/t4q85r358srxyjt/بروجكت+سستم+كوميونتي+١٦٠+امر.zip/file", description: "وصف المشروع 5: هذا هو المشروع الخامس." }
+    ];
 
-        function showLoginForm() {
-            document.getElementById('login-form').style.display = 'block'; // عرض نموذج تسجيل الدخول
-        }
+  // إضافة الأكواد الجديدة مع الجوائز
+  const redeemCodes = [
+    { code: 'MARYAM500', reward: 500 },
+    { code: 'BONUS300', reward: 300 },
+    { code: 'VIP1000', reward: 1000 },
+    { code: 'DISCOUNT200', reward: 200 },
+    { code: 'NEWUSER400', reward: 400 },
+        // الأكواد الإضافية الجديدة
+    { code: 'FREESPINS100', reward: 100 },
+    { code: 'GIFTCOINS250', reward: 250 },
+    { code: 'EXTRA500', reward: 500 },
+    { code: 'COINBOOST150', reward: 150 },
+    { code: 'DAILYBONUS800', reward: 800 }
+    ];
 
-        function login() {
-  username = document.getElementById('username').value;
-  if (!username) {
-    alert('يرجى إدخال اسم المستخدم');
-    return;
+  function showLoginForm() {
+    document.getElementById('login-form').style.display = 'block';
   }
 
-  // إذا كان اسم المستخدم "bontsnews"، أعطه 50,000 كوينز، أما البقية فـ 50 كوينز
-  if (username === 'bontsnews') {
-    if (!users[username]) {
-      users[username] = { coins: 50000 }; // تعيين عدد الكوينز إلى 50,000
+  function login() {
+    username = document.getElementById('username').value;
+    if (!username) {
+      alert('يرجى إدخال اسم المستخدم');
+      return;
     }
-  } else {
-    if (!users[username]) {
-      users[username] = { coins: 50 }; // تعيين عدد الكوينز إلى 50
+
+    if (username === 'bontsnews') {
+      if (!users[username]) {
+        users[username] = { coins: 50000 };
+      }
+    } else {
+      if (!users[username]) {
+        users[username] = { coins: 50 };
+      }
+    }
+
+    coins = users[username].coins;
+    localStorage.setItem('users', JSON.stringify(users));
+
+    document.getElementById('login-section').style.display = 'none';
+    document.getElementById('collect-coins').style.display = 'block';
+    document.getElementById('redeem-code-section').style.display = 'block';
+    document.getElementById('buy-projects').style.display = 'block';
+    document.getElementById('coin-count').textContent = coins;
+
+    createProjectButtons();
+
+    // رسالة ترحيب للمستخدم
+    document.getElementById('welcome-message').textContent = `أهلاً بك، ${username}!`;
+
+    setInterval(collectCoins, 60000);
+  }
+
+  function collectCoins() {
+    coins += 1;
+    updateCoinCount();
+  }
+
+  function updateCoinCount() {
+    document.getElementById('coin-count').textContent = coins;
+    users[username].coins = coins;
+    localStorage.setItem('users', JSON.stringify(users));
+  }
+
+  function createProjectButtons() {
+    const projectButtonsContainer = document.getElementById('project-buttons');
+    projectButtonsContainer.innerHTML = '';
+
+    projects.forEach(project => {
+      const button = document.createElement('button');
+      button.classList.add('btn');
+      button.innerHTML = `${project.name} - ${project.price} كوينز`;
+      button.onclick = () => buyProject(project);
+      projectButtonsContainer.appendChild(button);
+    });
+  }
+
+  function buyProject(project) {
+    if (coins >= project.price) {
+      coins -= project.price;
+      updateCoinCount();
+      alert(`تم شراء المشروع: ${project.name}`);
+      window.open(project.file, '_blank');
+    } else {
+      alert('ليس لديك ما يكفي من الكوينز لشراء هذا المشروع.');
     }
   }
 
-  coins = users[username].coins; // استرجاع عدد الكوينز من بيانات المستخدم
-  localStorage.setItem('users', JSON.stringify(users)); // حفظ بيانات المستخدمين
+  function redeemCode() {
+    const code = document.getElementById('redeem-code').value;
+    const currentTime = new Date().getTime();
 
-  document.getElementById('login-section').style.display = 'none'; // إخفاء قسم تسجيل الدخول
-  document.getElementById('collect-coins').style.display = 'block'; // عرض قسم جمع الكوينز
-  document.getElementById('redeem-code-section').style.display = 'block'; // عرض قسم استبدال الأكواد
-  document.getElementById('buy-projects').style.display = 'block'; // عرض قسم شراء المشاريع
-  document.getElementById('coin-count').textContent = coins; // عرض عدد الكوينز الحالي
+    const codeDetails = redeemCodes.find(c => c.code === code);
 
-  // إنشاء أزرار المشاريع عند تحميل الصفحة
-  createProjectButtons();
+    if (!codeDetails) {
+      alert('الكود غير صالح!');
+      return;
+    }
 
-  // جمع الكوينز كل دقيقة
-  setInterval(collectCoins, 60000); // 60000 مللي ثانية = دقيقة واحدة
-}
+    const lastRedeemTime = localStorage.getItem(`lastRedeemTime_${code}`);
 
-        function collectCoins() {
-            coins += 1; // زيادة عدد الكوينز بمقدار 1
-            updateCoinCount();
-        }
+    if (lastRedeemTime && currentTime - lastRedeemTime < 24 * 60 * 60 * 1000) {
+      alert('يمكنك استبدال هذا الكود فقط مرة واحدة كل 24 ساعة.');
+      return;
+    }
 
-        function updateCoinCount() {
-            document.getElementById('coin-count').textContent = coins; // تحديث عدد الكوينز في الصفحة
-            users[username].coins = coins; // تحديث عدد الكوينز في بيانات المستخدم
-            localStorage.setItem('users', JSON.stringify(users)); // حفظ بيانات المستخدمين
-}
+    coins += codeDetails.reward;
+    updateCoinCount();
+    alert(`تم استبدال الكود بنجاح! حصلت على ${codeDetails.reward} كوينز`);
 
-function createProjectButtons() {
-  const projectButtonsContainer = document.getElementById('project-buttons');
-  projectButtonsContainer.innerHTML = ''; // مسح الأزرار السابقة
-
-  projects.forEach((project) => {
-    const button = document.createElement('button');
-    button.className = 'btn';
-    button.textContent = `شراء ${project.name} - ${project.price} كوينز`;
-    button.onclick = () => buyProject(project);
-    projectButtonsContainer.appendChild(button);
-  });
-}
-
-function buyProject(project) {
-  if (coins >= project.price) {
-    coins -= project.price; // خصم الكوينز
-    updateCoinCount(); // تحديث عدد الكوينز في الواجهة
-    alert(`لقد قمت بشراء ${project.name} بنجاح!`);
-    window.open(project.file, '_blank'); // فتح الرابط في نافذة جديدة
-  } else {
-    alert('ليس لديك ما يكفي من الكوينز لشراء هذا المشروع.');
+    // تحديث الوقت الذي تم فيه استبدال الكود
+    localStorage.setItem(`lastRedeemTime_${code}`, currentTime);
   }
-}
-
-function redeemCode() {
-  const code = document.getElementById('redeem-code').value;
-  if (code === 'MARYAM500') { // تأكد من الكود المستخدم
-    coins += 500; // إضافة 50 كوينز
-    updateCoinCount(); // تحديث عدد الكوينز
-    alert('تم استبدال الكود بنجاح! لقد حصلت على 500 كوينز.');
-  } else {
-    alert('الكود غير صحيح. حاول مرة أخرى.');
-  }
-  document.getElementById('redeem-code').value = ''; // مسح حقل الإدخال
-}
-</script> 
-</body> 
+</script>
+</body>
 </html>

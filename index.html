@@ -7,79 +7,170 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(rgba(54, 57, 63, 0.9), rgba(32, 34, 37, 0.9)), url('background.jpg') center/cover;
+            background: linear-gradient(rgba(34, 37, 41, 0.95), rgba(23, 25, 28, 0.95)), url('background.jpg') center/cover;
             color: #ffffff;
             margin: 0;
-            overflow-x: hidden; /* منع التحرك يمينًا ويسارًا */
-            padding: 0 10px; /* إضافة padding لجعل المحتوى أكثر ملاءمة */
+            overflow-x: hidden;
+            padding: 0 10px;
         }
 
         header {
-            background-color: rgba(88, 101, 242, 0.9);
-            padding: 40px 20px;
+            background-color: rgba(88, 101, 242, 0.95);
+            padding: 30px 20px;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
             border-radius: 0 0 15px 15px;
-            backdrop-filter: blur(5px);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
+        /* عنوان الموقع */
         header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 2.8em;
             color: #ffffff;
+            text-shadow: 1px 1px 5px #333;
+            margin: 0;
+            flex: 1;
+            margin-top: 20px;
         }
 
-        header p {
-            font-size: 1.2em;
-            color: #dddddd;
+        /* زر القائمة المنسدلة */
+        .menu-icon {
+    display: none;
+    font-size: 1.8em;
+    cursor: pointer;
+    color: #ffffff;
+    position: absolute;
+    top: 15px;
+    right: 15px; /* تعديل المسافة اليمنى */
+    margin-left: 20px; /* إضافة مسافة لزيادة البعد عن العنوان */
+    transition: transform 0.3s ease;
+}
+
+        .menu-icon span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background-color: #ffffff;
+            margin: 5px 0;
+            transition: transform 0.3s ease;
         }
 
+        /* القائمة المنسدلة للجوال */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 70px;
+            right: 10px;
+            background-color: rgba(47, 49, 54, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            flex-direction: column;
+            gap: 10px;
+            width: 80%;
+            max-width: 250px;
+            text-align: center;
+            animation: fadeIn 0.3s ease;
+            z-index: 1; /* التأكد من ظهور القائمة فوق العناصر الأخرى */
+        }
+
+        .dropdown-menu a {
+            color: #ffffff;
+            background-color: rgba(88, 101, 242, 0.85);
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #7289DA;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-menu.show {
+            display: flex;
+        }
+
+        /* القائمة العادية لأجهزة الكمبيوتر */
         nav {
             display: flex;
             justify-content: center;
-            flex-wrap: wrap; /* السماح باللف عند الحاجة */
-            gap: 10px;
-            margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 25px;
         }
 
         nav a {
             color: #ffffff;
             background-color: rgba(88, 101, 242, 0.85);
-            padding: 8px 15px; /* تقليل padding لجعل الأزرار أصغر */
-            border-radius: 30px; /* تقليل الزوايا لتكون أكثر سلاسة */
+            padding: 12px 25px;
+            border-radius: 30px;
             text-decoration: none;
             transition: background-color 0.3s ease, transform 0.3s ease;
             font-weight: bold;
-            font-size: 0.85em; /* تقليل حجم الخط */
+            font-size: 1em;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         nav a:hover {
             background-color: #7289DA;
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
 
+        /* القسم الرئيسي */
         section {
             text-align: center;
-            margin: 40px 20px;
+            margin: 50px 20px;
         }
 
         section h2 {
-            font-size: 2em;
+            font-size: 2.5em;
             color: #ffffff;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.6);
         }
 
         section p {
-            font-size: 1.1em;
+            font-size: 1.2em;
             color: #bbbbbb;
+            line-height: 1.5;
+        }
+
+        section h3 {
+            font-size: 1.8em;
+            color: #80E2FF;
+            margin-top: 30px;
+        }
+
+        .code {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #FFD700;
+            background-color: #444;
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         .support {
             margin-top: 40px;
-            padding: 20px;
-            background: linear-gradient(rgba(20, 22, 24, 0.85), rgba(47, 49, 54, 0.85));
+            padding: 25px;
+            background: linear-gradient(rgba(20, 22, 24, 0.9), rgba(47, 49, 54, 0.9));
             border-radius: 10px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
             text-align: center;
         }
 
@@ -90,69 +181,54 @@
         }
 
         .support p {
-            font-size: 1.1em;
-            color: #bbbbbb;
+            font-size: 1.2em;
+            color: #cccccc;
         }
 
         .support a {
             display: inline-block;
-            padding: 10px 20px;
+            padding: 12px 25px;
             background-color: #7289DA;
             color: #ffffff;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
             transition: background-color 0.3s ease, transform 0.3s ease;
             font-weight: bold;
+            font-size: 1em;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         .support a:hover {
             background-color: #99AAB5;
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
 
         /* استعلامات الوسائط لتحسين التصميم للأجهزة المحمولة */
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
+            nav {
+                display: none; /* إخفاء القائمة العادية على الجوال */
             }
 
-            header p {
-                font-size: 1em;
+            .menu-icon {
+                display: block; /* عرض زر الثلاث شرطات */
             }
 
-            nav a {
-                font-size: 0.75em; /* تقليل حجم الخط أكثر على الأجهزة الصغيرة */
-                padding: 6px 10px; /* تقليل padding */
-            }
-
-            section h2 {
-                font-size: 1.8em;
-            }
-
-            section p {
-                font-size: 1em;
-            }
-
-            .support h3 {
-                font-size: 1.8em;
-            }
-
-            .support p {
-                font-size: 1em;
-            }
-
-            .support a {
-                padding: 8px 16px;
+            .dropdown-menu.show {
+                display: flex;
             }
         }
 
         @media (max-width: 480px) {
             header {
-                padding: 30px 10px;
+                padding: 20px 10px;
             }
 
             section {
                 margin: 30px 10px;
+            }
+
+            .support {
+                padding: 20px;
             }
         }
     </style>
@@ -160,28 +236,50 @@
 <body>
     <header>
         <h1>BONTS NEWS</h1>
-        <p>اكتشف أفضل وأحدث البوتات واطلع على آخر الأخبار</p>
+        <!-- زر القائمة المنسدلة يظهر أعلى يمين الصفحة -->
+        <div class="menu-icon" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </header>
 
+    <!-- القائمة المنسدلة للجوال -->
+    <div class="dropdown-menu">
+        <a href="music-bots.html">بوتات الموسيقى</a>
+        <a href="fun-bots.html">بوتات التسلية</a>
+        <a href="ad-request.html">قسم الإعلانات</a>
+        <a href="coins.html">بروجكتات</a>
+        <a href="banks-bot.html">بوتات بنك</a>
+    </div>
+
+    <!-- القائمة العادية لأجهزة الكمبيوتر -->
     <nav>
         <a href="music-bots.html">بوتات الموسيقى</a>
         <a href="fun-bots.html">بوتات التسلية</a>
-        <a href="ad-request.html">قسم الإعلانات</a> <!-- زر قسم الإعلانات الجديد -->
-        <a href="coins.html">بروجكتات</a> <!-- زر بروجكتات الجديد -->
+        <a href="ad-request.html">قسم الإعلانات</a>
+        <a href="coins.html">بروجكتات</a>
+        <a href="banks-bot.html">بوتات بنك</a>
     </nav>
 
     <section>
-        <h2>مرحباً بكم في موقع أفضل بوتات دسكورد!</h2>
+        <h2>مرحباً بكم في موقع أفضل بوتات دسكورد</h2>
         <p>اختر الفئة التي ترغب باستكشافها.</p>
-        <h3>هذا الكود ستحصل على 500 نقطه هيا استبدله في بروجكتات</h3>
-        <p>MARYAM500</p>
-    </section>    
+        <h3>هذا الكود ستحصل على <span style="color:#FFD700;">500</span> نقطة! استبدله في بروجكتاتك:</h3>
+        <div class="code">MARYAM500</div>
+    </section>
 
-    <!-- قسم سيرفر الدعم -->
-    <div class="support">
+    <section class="support">
         <h3>سيرفر الدعم</h3>
         <p>إذا كان لديك أي استفسارات أو تحتاج إلى مساعدة، انضم إلى سيرفر الدعم الخاص بنا!</p>
-        <a href="https://discord.gg/Zh2XdxSjGP" target="_blank">انضم إلى سيرفر الدعم</a>
-    </div>
+        <a href="support-server-link.html">انضم إلى سيرفر الدعم</a>
+    </section>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.dropdown-menu');
+            menu.classList.toggle('show');
+        }
+    </script>
 </body>
 </html>
