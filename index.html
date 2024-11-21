@@ -26,7 +26,6 @@
             align-items: center;
         }
 
-        /* عنوان الموقع */
         header h1 {
             font-size: 2.8em;
             color: #ffffff;
@@ -36,18 +35,17 @@
             margin-top: 20px;
         }
 
-        /* زر القائمة المنسدلة */
         .menu-icon {
-    display: none;
-    font-size: 1.8em;
-    cursor: pointer;
-    color: #ffffff;
-    position: absolute;
-    top: 15px;
-    right: 15px; /* تعديل المسافة اليمنى */
-    margin-left: 20px; /* إضافة مسافة لزيادة البعد عن العنوان */
-    transition: transform 0.3s ease;
-}
+            display: none;
+            font-size: 1.8em;
+            cursor: pointer;
+            color: #ffffff;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            margin-left: 20px;
+            transition: transform 0.3s ease;
+        }
 
         .menu-icon span {
             display: block;
@@ -58,7 +56,6 @@
             transition: transform 0.3s ease;
         }
 
-        /* القائمة المنسدلة للجوال */
         .dropdown-menu {
             display: none;
             position: absolute;
@@ -74,7 +71,7 @@
             max-width: 250px;
             text-align: center;
             animation: fadeIn 0.3s ease;
-            z-index: 1; /* التأكد من ظهور القائمة فوق العناصر الأخرى */
+            z-index: 1;
         }
 
         .dropdown-menu a {
@@ -93,16 +90,10 @@
             transform: scale(1.05);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .dropdown-menu.show {
             display: flex;
         }
 
-        /* القائمة العادية لأجهزة الكمبيوتر */
         nav {
             display: flex;
             justify-content: center;
@@ -128,7 +119,6 @@
             transform: scale(1.08);
         }
 
-        /* القسم الرئيسي */
         section {
             text-align: center;
             margin: 50px 20px;
@@ -203,14 +193,13 @@
             transform: scale(1.08);
         }
 
-        /* استعلامات الوسائط لتحسين التصميم للأجهزة المحمولة */
         @media (max-width: 768px) {
             nav {
-                display: none; /* إخفاء القائمة العادية على الجوال */
+                display: none;
             }
 
             .menu-icon {
-                display: block; /* عرض زر الثلاث شرطات */
+                display: block;
             }
 
             .dropdown-menu.show {
@@ -236,7 +225,6 @@
 <body>
     <header>
         <h1>BONTS NEWS</h1>
-        <!-- زر القائمة المنسدلة يظهر أعلى يمين الصفحة -->
         <div class="menu-icon" onclick="toggleMenu()">
             <span></span>
             <span></span>
@@ -244,29 +232,29 @@
         </div>
     </header>
 
-    <!-- القائمة المنسدلة للجوال -->
     <div class="dropdown-menu">
         <a href="music-bots.html">بوتات الموسيقى</a>
         <a href="fun-bots.html">بوتات التسلية</a>
         <a href="ad-request.html">قسم الإعلانات</a>
         <a href="coins.html">بروجكتات</a>
         <a href="banks-bot.html">بوتات بنك</a>
+        <a href="bestwebgg.html">أفضل مواقع مفيدة</a>
     </div>
 
-    <!-- القائمة العادية لأجهزة الكمبيوتر -->
     <nav>
         <a href="music-bots.html">بوتات الموسيقى</a>
         <a href="fun-bots.html">بوتات التسلية</a>
         <a href="ad-request.html">قسم الإعلانات</a>
         <a href="coins.html">بروجكتات</a>
         <a href="banks-bot.html">بوتات بنك</a>
+        <a href="bestwebgg.html">أفضل مواقع مفيدة</a>
     </nav>
 
     <section>
         <h2>مرحباً بكم في موقع أفضل بوتات دسكورد</h2>
         <p>اختر الفئة التي ترغب باستكشافها.</p>
-        <h3>هذا الكود ستحصل على <span style="color:#FFD700;">500</span> نقطة! استبدله في بروجكتاتك:</h3>
-        <div class="code">MARYAM500</div>
+        <h3>هذا الكود ستحصل على <span style="color:#FFD700;">200</span> نقطة! استبدله في بروجكتاتك:</h3>
+        <div class="code">DISCOUNT200</div>
     </section>
 
     <section class="support">
@@ -277,8 +265,8 @@
 
     <script>
         function toggleMenu() {
-            const menu = document.querySelector('.dropdown-menu');
-            menu.classList.toggle('show');
+            const menu = document.querySelector(".dropdown-menu");
+            menu.classList.toggle("show");
         }
     </script>
 </body>
